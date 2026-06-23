@@ -43,7 +43,7 @@ ETL-пайплайн для аналитики игровой платформы
 
 ```bash
 git clone <repo-url>
-cd de-test
+cd de-test-01
 
 docker compose up -d --build      # или:  make up
 ```
