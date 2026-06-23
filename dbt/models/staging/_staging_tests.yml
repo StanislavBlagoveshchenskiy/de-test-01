@@ -1,0 +1,96 @@
+version: 2
+
+models:
+  # ---------------- Игроки ----------------
+  - name: stg_players
+    description: "Игроки (типизированные)."
+    columns:
+      - name: id
+        tests: [not_null, unique]
+      - name: country
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['DE', 'FR', 'IN', 'RU', 'UK', 'US']
+      - name: registration_type
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['premium', 'standard', 'vip']
+
+  # ---------------- Справочники ----------------
+  - name: stg_providers_map
+    columns:
+      - name: id
+        tests: [not_null, unique]
+
+  - name: stg_games_map
+    columns:
+      - name: id
+        tests: [not_null, unique]
+      - name: provider_id
+        tests:
+          - relationships:
+              to: ref('stg_providers_map')
+              field: id
+
+  - name: stg_currency_rates
+    columns:
+      - name: rate_to_usd
+        tests: [not_null]
+      - name: currency
+        tests:
+          - accepted_values:
+              values: ['USD', 'EUR', 'GBP', 'RUB']
+
+  # ---------------- Транзакции ----------------
+  - name: stg_deposits
+    columns:
+      - name: id
+        tests: [not_null, unique]
+      - name: player_id
+        tests:
+          - relationships:
+              to: ref('stg_players')
+              field: id
+      - name: provider_id
+        tests:
+          - relationships:
+              to: ref('stg_providers_map')
+              field: id
+      - name: currency
+        tests:
+          - accepted_values:
+              values: ['USD', 'EUR', 'GBP', 'RUB']
+      - name: amount_usd
+        tests:
+          - not_null
+
+  - name: stg_withdrawals
+    columns:
+      - name: id
+        tests: [not_null, unique]
+      - name: player_id
+        tests:
+          - relationships:
+              to: ref('stg_players')
+              field: id
+      - name: amount_usd
+        tests: [not_null]
+
+  - name: stg_games
+    columns:
+      - name: id
+        tests: [not_null, unique]
+      - name: player_id
+        tests:
+          - relationships:
+              to: ref('stg_players')
+              field: id
+      - name: game_id
+        tests:
+          - relationships:
+              to: ref('stg_games_map')
+              field: id
+      - name: amount_usd
+        tests: [not_null]

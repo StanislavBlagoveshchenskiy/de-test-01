@@ -1,0 +1,16 @@
+# profiles.yml — подключение dbt к Postgres.
+# Все параметры берутся из переменных окружения (env_var) с дефолтами для локального запуска.
+# В Docker эти переменные приходят из .env через docker-compose.
+casino_dwh:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('DBT_HOST', 'postgres') }}"
+      port: "{{ env_var('DBT_PORT', '5432') | int }}"
+      user: "{{ env_var('DBT_USER', 'postgres') }}"
+      password: "{{ env_var('DBT_PASSWORD', 'postgres') }}"
+      dbname: "{{ env_var('DBT_DBNAME', 'casino') }}"
+      schema: "{{ env_var('DBT_SCHEMA', 'analytics') }}"
+      threads: 4
+      sslmode: disable

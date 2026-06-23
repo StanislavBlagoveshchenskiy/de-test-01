@@ -1,0 +1,14 @@
+-- Отдельная БД под метаданные Airflow, чтобы не мешать их с данными проекта.
+-- Пароль для локалки дефолтный; в compose переопределяется через env.
+DO $$
+BEGIN
+   IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'airflow') THEN
+      CREATE ROLE airflow LOGIN PASSWORD 'airflow';
+   END IF;
+END
+$$;
+
+SELECT 'CREATE DATABASE airflow OWNER airflow'
+WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'airflow')\gexec
+
+GRANT ALL PRIVILEGES ON DATABASE airflow TO airflow;

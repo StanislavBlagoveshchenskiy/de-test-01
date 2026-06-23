@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: monthly_summary
+    description: >
+      Витрина (VIEW): суммы депозитов, выводов и ставок в USD,
+      агрегированные по месяцам и странам.
+    columns:
+      - name: month
+        tests: [not_null]
+      - name: country
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['DE', 'FR', 'IN', 'RU', 'UK', 'US']
+      - name: total_deposits_usd
+        tests:
+          - not_null
+          - non_negative
+      - name: total_withdrawals_usd
+        tests:
+          - not_null
+          - non_negative
+      - name: total_bets_usd
+        tests:
+          - not_null
+          - non_negative
+    # Уникальность зерна витрины (month, country) проверяется singular-тестом
+    # tests/assert_monthly_summary_unique_grain.sql

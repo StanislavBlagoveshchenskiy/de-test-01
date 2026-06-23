@@ -1,0 +1,7 @@
+# Зависимости, устанавливаемые в окружение Airflow (для тасков load_csv и build_charts).
+# Версии pandas/sqlalchemy приходят с базовым образом Airflow — здесь только то,
+# чего в нём нет либо что нужно явно зафиксировать.
+psycopg2-binary==2.9.9
+pandas==2.1.4
+matplotlib==3.9.2
+plotly==5.24.1

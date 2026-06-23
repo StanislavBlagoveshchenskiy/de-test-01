@@ -1,0 +1,7 @@
+# Зависимости для автономного запуска viz/build_charts.py
+# (вне Docker, напрямую: pip install -r viz/requirements.txt)
+pandas==2.1.4
+matplotlib==3.9.2
+plotly==5.24.1
+SQLAlchemy>=1.4,<2.1
+psycopg2-binary==2.9.9

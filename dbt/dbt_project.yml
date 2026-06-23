@@ -1,0 +1,22 @@
+name: 'casino_dwh'
+version: '1.0.0'
+config-version: 2
+
+profile: 'casino_dwh'
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  casino_dwh:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: view   # monthly_summary — представление

@@ -1,0 +1,10 @@
+**/__pycache__/
+**/*.pyc
+reports/*
+dbt/target/
+dbt/logs/
+dbt/dbt_packages/
+.git/
+.env
+*.md
+docs/

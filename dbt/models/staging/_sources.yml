@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    description: "Исходные таблицы, загружаемые ETL-таском из CSV (1:1)."
+    tables:
+      - name: players
+      - name: deposits
+      - name: withdrawals
+      - name: games
+      - name: currency_rates
+      - name: providers_map
+      - name: games_map

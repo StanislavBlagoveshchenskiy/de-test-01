@@ -1,0 +1,9 @@
+.env
+__pycache__/
+*.pyc
+
+# dbt build artifacts
+dbt/target/
+dbt/logs/
+dbt/dbt_packages/
+dbt/.user.yml
